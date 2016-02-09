@@ -7,12 +7,12 @@ Endpoint.js is an Integrated Module Controller (IMC) that enables modulus with o
 Endpoint.js was developed at the National Geospatial-Intelligence Agency (NGA) in collaboration with Booz Allen. The government has "unlimited rights" and is releasing this software to increase the impact of government investments by providing developers with the opportunity to take things in new directions. The software use, modification, and distribution rights are stipulated within the [MIT] (http://choosealicense.com/licenses/mit/) license. 
 
 ####Other Open Source Dependencies
-Browserify (MIT)
-EventEmitter2  (MIT)
-node-uuid (MIT)
-readable-stream (MIT)
-through2 (MIT)
-xtend (MIT)
+* Browserify (MIT)
+* EventEmitter2  (MIT)
+* node-uuid (MIT)
+* readable-stream (MIT)
+* through2 (MIT)
+* xtend (MIT)
 
 ###Pull Requests
 

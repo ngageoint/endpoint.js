@@ -1,8 +1,8 @@
-##What it does
+###What it does
 
 Endpoint.js is an Integrated Module Controller (IMC) that enables modulus with one or more web applications to reuse exported functionality by providing robust communication, registry, and execution interface to clients.
 
-##Origin
+###Origin
 
 Endpoint.js was developed at the National Geospatial-Intelligence Agency (NGA) in collaboration with Booz Allen. The government has "unlimited rights" and is releasing this software to increase the impact of government investments by providing developers with the opportunity to take things in new directions. The software use, modification, and distribution rights are stipulated within the [MIT] (http://choosealicense.com/licenses/mit/) license. 
 

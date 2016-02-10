@@ -1,0 +1,30 @@
+{
+  "name": "endpointjs",
+  "description": "Endpoint.js enables modules within a web application to discover and use each other, whether that be on the same web page, other browser windows and tabs, iframes, servers and web workers in a reactive way by providing robust discovery, execution and streaming interfaces.",
+  "main": "dist/endpoint-0.4.0.min.js",
+  "authors": [
+    "datasedai"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "websockets",
+    "webworkers",
+    "postmessage",
+    "localstorage",
+    "rpc",
+    "webrtc",
+    "client",
+    "server"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

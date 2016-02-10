@@ -1,0 +1,12 @@
+node_modules
+dist/*.pdf
+dist/jsdoc*
+test/temp
+test/build
+tmp
+.DS_Store
+npm-debug.log
+coverage
+report
+*.iml
+.idea

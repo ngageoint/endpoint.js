@@ -1,0 +1,45 @@
+default:
+  - build
+
+lint:
+  - newer:jshint:default
+  - newer:jscs:default
+
+demo:
+  - browserify:demo
+  - browserify:webrtcdemo
+  - express:demo
+  - watch:demo
+
+docs:
+  - clean:docs
+  - jsdoc:default
+  - docs-pdf
+
+integration-setup:
+  - selenium-install
+
+integration:
+  - selenium-start
+  - browserify:demo
+  - express:demo
+  - mkdir:reports
+  - webdriver:integration
+
+test:
+  - mkdir:unit
+  - karma:unit
+
+plugins:
+  - browserify:webrtc
+  - uglify:webrtc
+
+build:
+  - clear
+  - clean:default
+  - lint
+  - browserify:build
+
+production:
+  - build
+  - uglify:default

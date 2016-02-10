@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Endpoint.js Plugin / Plot Point / Sidebar / MapAPI</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="map">
+
+    </div>
+
+    <script type="text/javascript">
+        window.endpointLogLevel = 'trace';
+    </script>
+
+    <script src="https://code.jquery.com/jquery-1.11.3.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.12/HTMLImports.min.js" type="text/javascript"></script>
+    <script src="../build/endpoint.demo.js" type="text/javascript"></script>
+
+    <link rel="import" href="map-api/mapapi.html">
+    <link rel="import" href="sidebar-api/sidebar.html">
+    <link rel="import" href="plot-point-api/plot-point.html">
+
+    <script type="text/template" id="tab-content">
+
+        <strong>Welcome</strong><br><br>
+
+        This is a really basic example of a sidebar.  Endpoint.js itself has no graphical components, it
+        is only a platform.  In order to take advantage of it, you need to create plugins.<br><br>
+
+        There are three plugins in use on this page.  First, the mapapi, followed by this sidebar,
+        then the plot point tab, which is the next tab.<br><br>
+
+        This example uses HTML Imports to include three plugins.
+
+    </script>
+
+    <script type="text/javascript">
+
+        // Subscribe to sidebar and add welcome message.  Subscribe to MapAPI and initialize map.
+        var fmgr = window.endpoint.manageFacades(
+                ['sidebar-api', '0.1'],
+                ['mapapi', '1.0']
+        );
+
+        fmgr.on('ready', function() {
+
+            // Login and create a map
+            fmgr.getApi('mapapi').createMap('map', 'OpenLayers');
+
+            fmgr.getApi('sidebar-api')
+                    .addTab('Welcome')
+                    .then(function(divId) {
+                        var welcomeText = $('#tab-content').html();
+                        $('#' + divId).html(welcomeText);
+                        fmgr.getApi('sidebar-api').focusTab(2);
+                    });
+
+        });
+    </script>
+
+</body>
+</html>

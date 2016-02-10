@@ -1,0 +1,70 @@
+
+<link rel="stylesheet" type="text/css" href="chat-api.css">
+
+<script type="text/template" id="chat-api-remote-message">
+    <li class="left clearfix"><span class="chat-img pull-left">
+                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                        </span>
+        <div class="chat-body clearfix">
+            <div class="header">
+                <strong class="primary-font">Them</strong> <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span>{time}</small>
+            </div>
+            <p class="message">
+                {msg}
+            </p>
+        </div>
+    </li>
+
+</script>
+
+<script type="text/template" id="chat-api-local-message">
+
+    <li class="right clearfix"><span class="chat-img pull-right">
+                            <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                        </span>
+        <div class="chat-body clearfix">
+            <div class="header">
+                <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{time}</small>
+                <strong class="pull-right primary-font">Me</strong>
+            </div>
+            <p class="message">
+                {msg}
+            </p>
+        </div>
+    </li>
+
+</script>
+
+
+<script type="text/template" id="chat-api-template">
+
+    <div class="container col-md-12 chat-main-box">
+        <div class="row">
+            <div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-comment"></span> Chat
+                    </div>
+                    <div class="panel-body">
+                        <ul class="chat">
+
+
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input class="btn-input" type="text" class="form-control input-sm" style="width: 250px" placeholder="Type your message here..." />
+                        <span style="">
+                            <button class="btn btn-warning btn-sm btn-chat" style="height: 23px; margin-top: 0; padding-top: 3px">Send</button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/javascript" src="chat-api.js"></script>

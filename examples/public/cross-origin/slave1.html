@@ -1,0 +1,26 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript">
+    window.endpointLogLevel = 'none';
+</script>
+<script src="../build/endpoint.demo.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    var windowLinkConfig = {
+        linkId: 'link-8282',
+        type: 'window',
+        settings: {
+            origin: 'http://localhost:8282',
+            external: true
+        }
+    };
+
+    var link = window.endpoint.getConfiguration().addLink(windowLinkConfig);
+    link.announceWindow(window.parent);
+    // Default-tab is needed for ie11
+    window.endpoint.getConfiguration().createBridge(['default-worker', 'default-tab', 'link-8282']);
+
+</script>
+</body>
+</html>

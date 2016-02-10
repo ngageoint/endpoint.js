@@ -1,0 +1,22 @@
+.ui-tabs.ui-widget-content {
+    border: none;
+}
+.ui-widget {
+    font-size:80% !important;
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 400px !important;
+    }
+}
+@media (min-width: 992px) {
+    .sidebar {
+        width: 400px !important;
+    }
+}
+@media (min-width: 1200px) {
+    .sidebar {
+        width: 400px !important;
+    }
+}

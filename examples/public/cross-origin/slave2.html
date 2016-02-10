@@ -1,0 +1,25 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript">
+    window.endpointLogLevel = 'none';
+</script>
+<script src="../build/endpoint.demo.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    var windowLinkConfig = {
+        linkId: 'link-8283',
+        type: 'window',
+        settings: {
+            origin: 'http://localhost:8283',
+            external: true
+        }
+    };
+
+    var link = window.endpoint.getConfiguration().addLink(windowLinkConfig);
+    link.announceWindow(window.parent);
+    window.endpoint.getConfiguration().createBridge(['default-worker', 'default-tab', 'link-8283']);
+
+</script>
+</body>
+</html>

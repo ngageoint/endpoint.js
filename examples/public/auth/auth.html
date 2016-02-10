@@ -1,0 +1,73 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript">
+    window.endpointLogLevel = 'trace';
+</script>
+<script src="../build/endpoint.demo.js" type="text/javascript"></script>
+<script src="api.js" type="text/javascript"></script>
+<p>This example will connect a facade to an adapter, perform authentication, call a protected method, and disconnect.</p>
+<p>To try the un-authorized example, perform steps 1, 3 and 4 without performing step 2.</p>
+<p>Console messages will be output to the text box bellow.  To see trace information, open the browser console.</p>
+<a href='#' onclick='connect()'>Step 1: connect facade</a><br>
+<a href='#' onclick='performAuth()'>Step 2: call authentication api</a><br>
+<a href='#' onclick='callProtected()'>Step 3: call protected method</a><br>
+<a href='#' onclick='disconnect()'>Step 4: disconnect</a><br>
+<textarea id='console' style='width: 1000px; height: 500px;'></textarea>
+<script type="text/javascript">
+
+    var facade;
+    var authApi;
+    var protectedApi;
+
+    function connect() {
+        facade = window.endpoint.createFacade('company-api', '1.0');
+        facade.on('ready', function() {
+            console.log('facade connected');
+            facade.getApi().getAuthenticationApi().facade()
+                    .then(function(authFacade) {
+                        console.log('loaded auth api');
+                        authApi = authFacade.getApi();
+                    });
+            facade.getApi().getProtectedApi().facade()
+                    .then(function(protectedFacade) {
+                        console.log('loaded protected api');
+                        protectedApi = protectedFacade.getApi();
+                    });
+        });
+        facade.on('closed', function() {
+            console.log('facade disconnected');
+        });
+    }
+
+    function performAuth() {
+        authApi.authorize('john', 'password1')
+                .then(function(success) {
+                    if (success) {
+                        console.log('successfully authorized');
+                    }
+                });
+    }
+
+    function callProtected() {
+        protectedApi.doSomethingInteresting()
+                .then(function(result) {
+                    console.log('did something interesting call returned');
+                })
+                .catch(function(error) {
+                    console.log('failed to do something interesting: ' + error);
+                });
+    }
+
+    function disconnect() {
+        facade.close();
+    }
+
+    console.log = function (message) {
+        var cons = document.getElementById('console');
+        cons.innerHTML += message + '\n';
+    }
+
+</script>
+</body>
+</html>

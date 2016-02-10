@@ -1,0 +1,129 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript">
+    window.endpointLogLevel = 'trace';
+</script>
+<script src="../build/endpoint.demo.js" type="text/javascript"></script>
+<p>This is the same as the general-api example, however it uses a hidden iframe to talk to a page on port 8284.
+    The other plugin also does the same, and then those two iframe instances talk to each other through a
+    shared worker.</p>
+<p>Once you have both windows up, use one window to create an adapter, and the other one to create a facade.</p>
+<p>Console messages will be output to the text box bellow.  To see trace information, open the browser console.</p>
+<a href='#' onclick='createAdapter()'>Step 1: create adapter</a><br>
+<a href='#' onclick='createFacade()'>Step 2: create facade</a><br>
+<a href='#' onclick='callFacade()'>Step 3: call facade</a><br>
+<a href='#' onclick='writeStream()'>Step 4: write stream</a><br>
+<a href='#' onclick='closeStream()'>Step 5: close stream</a><br>
+<textarea id='console' style='width: 1000px; height: 500px;'></textarea>
+<script type="text/javascript">
+
+    var windowLinkConfig = {
+        linkId: 'link-8284',
+        type: 'window',
+        settings: {
+            origin: 'http://localhost:8284',
+            external: true
+        }
+    };
+    window.endpoint.getConfiguration().addLink(windowLinkConfig);
+
+    var adapter;
+    var facade;
+    var inputStream;
+
+    var obj = {
+
+        apiFunction: function(input) {
+            console.log('apiFunction called with input: ' + input);
+            var context = adapter.getCurrentContext();
+
+            // Emit a test event
+            adapter.getEvents().emit('api-event', 'data');
+
+            // Write to the output
+            context.getOutputStream().write(input);
+
+            // Connect the input to the output.
+            context.getInputStream().pipe(context.getOutputStream()).pipe(context.getInputStream());
+
+            return 'returned value';
+
+        },
+
+        simplePipe: function() {
+            console.log('simplePipe setting up pipe');
+            var context = adapter.getCurrentContext();
+            context.getInputStream().pipe(context.getOutputStream()).pipe(context.getInputStream());
+        }
+    };
+
+    function createAdapter() {
+        adapter = window.endpoint.registerAdapter('api-example-co', '1.0', obj, { neighborhood: 'universal' });
+        console.log('Created Adapter');
+    }
+
+    function createFacade() {
+        facade = window.endpoint.createFacade('api-example-co', '1.0', { neighborhood: 'universal' });
+
+        facade.getEvents().on('api-event', function(event) {
+            console.log('Facade Received Event: ' + event);
+        });
+
+        facade.on('ready', function() {
+            console.log('Facade is ready');
+        });
+
+        facade.on('closed', function() {
+            console.log('Facade has closed');
+        });
+
+        console.log('Created Facade');
+    }
+
+    function callFacade() {
+
+        inputStream = facade.getApi().apiFunction("passed parameter")
+                .pipe(facade.getApi().simplePipe())
+                .pipe(function(chunk, enc, cb) {
+                    console.log('transforming value in stream: ' + chunk);
+                    this.push(chunk + ' [transformed]');
+                    cb();
+                }).then(function(result, outputStream) {
+                    console.log('got result: ' + result);
+
+                    outputStream.on('readable', function() {
+                        var msg;
+                        while ((msg = outputStream.read()) !== null) {
+                            console.log('read value from output stream: ' + msg);
+                        }
+                    });
+
+                    outputStream.on('end', function() {
+                        console.log('output stream was forced closed');
+                    });
+
+                }).stream();
+    }
+
+    function writeStream() {
+
+        inputStream.write('written data to stream');
+
+    }
+
+    function closeStream() {
+        inputStream.end();
+        console.log('Closed input stream');
+    }
+
+    console.log = function (message) {
+        var cons = document.getElementById('console');
+        cons.innerHTML += message + '\n';
+    }
+
+</script>
+<!-- needs to go here so that endpoint sets up the link before it loads the child -->
+<iframe src="http://localhost:8284/cross-origin/slave2.html" width="1" height="1" style="visibility:hidden; display:none"></iframe>
+</body>
+</html>

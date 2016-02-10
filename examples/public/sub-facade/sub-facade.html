@@ -1,0 +1,110 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript">
+    window.endpointLogLevel = 'trace';
+</script>
+<script src="../build/endpoint.demo.js" type="text/javascript"></script>
+<p>When you return an object from an Endpoint JS Adapter, you may wish to call methods on it, or pass that
+    object back as an argument to another facade function. Child Facades allow you to wrap a returned object
+    in a facade, so you can call methods on it, as opposed to just getting a serialized version of the object
+    back.</p>
+<p>Console messages will be output to the text box bellow.  To see trace information, open the browser console.</p>
+<a href='#' onclick='createAdapter()'>Step 1: create adapter</a><br>
+<a href='#' onclick='createFacade()'>Step 2: create facade</a><br>
+<a href='#' onclick='callFacade()'>Step 3: get child facade</a><br>
+<a href='#' onclick='callChildFacade()'>Step 4: call child facade</a><br>
+<a href='#' onclick='passFacade()'>Step 5: pass child facade to parent facade</a><br>
+<a href='#' onclick='closeFacade()'>Step 6: close facade</a><br>
+<textarea id='console' style='width: 1000px; height: 500px;'></textarea>
+<script type="text/javascript">
+
+    var adapter;
+
+    var facade;
+    var childFacade;
+
+    var api;
+    var childApi;
+
+    var obj = {
+
+        getChildFacade: function() {
+            return {
+                execute: function() {
+                    console.log('executed child facade');
+                }
+
+            }
+        },
+
+        executeChild: function(childFacade) {
+            console.log('parent is executing child ...');
+            childFacade.execute();
+        },
+
+    };
+
+    function createAdapter() {
+        adapter = window.endpoint.registerAdapter('api-example-sub-facade', '1.0', obj);
+        console.log('Created Adapter');
+    }
+
+    function createFacade() {
+        facade = window.endpoint.createFacade('api-example-sub-facade', '1.0');
+
+        facade.on('ready', function() {
+            console.log('Facade is ready');
+            api = facade.getApi();
+        });
+
+        facade.on('closed', function() {
+            console.log('Facade has closed');
+        });
+
+        console.log('Created Facade');
+    }
+
+    function callFacade() {
+
+        api.getChildFacade()
+            .facade()
+            .then(function(child) {
+                childFacade = child;
+                childApi = child.getApi();
+
+                console.log('Got child facade');
+                childFacade.on('closed', function() {
+                    console.log('Child facade has closed');
+                });
+            });
+
+    }
+
+    function callChildFacade() {
+
+        childApi.execute();
+
+    }
+
+    function passFacade() {
+
+        api.executeChild(childApi);
+        //api.executeChild(childFacade) would also work, but is harder to understand/read as a developer
+
+    }
+
+    function closeFacade() {
+
+        facade.close();
+
+    }
+   
+    console.log = function (message) {
+        var cons = document.getElementById('console');
+        cons.innerHTML += message + '\n';
+    }
+
+</script>
+</body>
+</html>

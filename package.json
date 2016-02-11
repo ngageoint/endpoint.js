@@ -19,6 +19,9 @@
     "url": "https://github.com/ngageoint/endpoint.js",
     "type": "git"
   },
+  "scripts": {
+      "test": "grunt test && grunt integration-setup && grunt integration"
+  },
   "devDependencies": {
     "browserify-istanbul": "^0.2.1",
     "express": "^4.13.3",

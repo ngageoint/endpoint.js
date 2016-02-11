@@ -1,5 +1,6 @@
-
 # ![Endpoint.js](docs/images/endpoint-small.png) Endpoint.js [v0.4.0](CHANGELOG.md)
+
+[![Build Status](https://travis-ci.org/ngageoint/endpoint.js.svg?branch=master)](https://travis-ci.org/ngageoint/endpoint.js)
 
 **Endpoint.js** enables modules within a web application to discover and use each other, whether that be on the same
 web page, other browser windows and tabs, iframes, servers and web workers in a

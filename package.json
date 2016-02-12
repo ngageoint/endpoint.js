@@ -20,7 +20,7 @@
     "type": "git"
   },
   "scripts": {
-      "test": "npm install -g grunt-cli && grunt production && grunt plugins && grunt test && grunt integration-setup && grunt integration"
+      "test": "npm install -g grunt-cli && grunt test && grunt integration-setup && grunt integration"
   },
   "devDependencies": {
     "browserify-istanbul": "^0.2.1",

@@ -107,8 +107,7 @@ license.
 
 ## Getting Support
 
-Our team is working to add a website and mailing list.  In the meantime, you can contact the primary author at
-datasedai@gmail.com or create an issue.
+Our team is working to add a website and mailing list.  In the meantime, you can create an issue.
 
 ## Compatibility
 

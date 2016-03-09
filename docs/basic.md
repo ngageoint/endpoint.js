@@ -1,6 +1,13 @@
 # Basic Endpoint.js
 
-Using Endpoint.js is as simple as creating one or more adapters, and using a facade to access the API and call functions.  More advanced scenarios are described [here](advanced.md).
+Endpoint.js's core purpose is to be a plugin framework with data streaming capabilities.  If you have a map, a
+sidebar, and a timeline within your application, you can use it to wrap and version each component,
+enabling access to your functionality through a published API. By encouraging developers and companies to
+design each component of their application in a re-usable manner, it enables individuals and groups to
+contribute to emergent capabilities built upon existing investment, allowing organizations to respond to change.
+
+Using Endpoint.js is as simple as creating one or more adapters, and using a facade to access the API and call
+functions.  More advanced scenarios are described [here](advanced.md).
 
 ## Table of Contents
 

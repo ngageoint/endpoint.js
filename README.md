@@ -3,76 +3,29 @@
 [![Build Status](https://travis-ci.org/ngageoint/endpoint.js.svg?branch=master)](https://travis-ci.org/ngageoint/endpoint.js)
 
 **Endpoint.js** enables modules within a web application to discover and use each other, whether that be on the same
-web page, other browser windows and tabs, iframes, servers and web workers in a
-[reactive way](https://en.wikipedia.org/wiki/Reactive_programming) by providing robust discovery, execution and streaming interfaces.
+web page, other browser windows and tabs, iframes, servers, web workers and processes in a
+[reactive way](https://en.wikipedia.org/wiki/Reactive_programming) by providing discovery, execution and streaming interfaces.
 
- - [What does it do?](#what-does-it-do)
- - [How does it work?](#how-does-it-work)
- - [How do I use it?](#how-do-i-use-it)
- - [Examples](#examples)
- - [Build](#build)
- - [Contributing](#contributing)
- - [Getting Support](#getting-support)
- - [Compatibility](#compatibility)
- - [Copyright and Legal](#copyright-and-legal)
- - [License](#license)
+![Ad-hoc Network](docs/images/network.png) A robust ad-hoc application network, enabling multi-hop communication across any topology, including browser windows, tabs, web workers, web servers, processes, and peer-to-peer
 
-## What does it do?
+![Increased Performance](docs/images/performance.png) Increased application performance, allowing easy off-loading and routing of complex processing to background workers, processes or browser tabs
 
-Endpoint.js's core purpose is to be a plugin framework with data streaming capabilities.  If you have a map, a
-sidebar, and a timeline within your application, you can use it to wrap and version each component,
-enabling access to your functionality through a published API. By encouraging developers and companies to
-design each component of their application in a re-usable manner, it enables individuals and groups to
-contribute to emergent capabilities built upon existing investment, allowing organizations to respond to change.
+![Save Time](docs/images/time.png) Develop Here, Deploy There: Develop to uniform APIs, reducing deployment and integration details to a configuration exercise
 
-Here are the core capabilities:
+![Built-in Security](docs/images/security.png) Built-in security features enables fine-grained control over movement of data
 
-* **RPC and Events**: Communication between components within the same page, windows, frames, web workers, servers and processes
-* **Data Orchestration**: Define data flows declaratively, routing data between remote endpoints before returning it to the client
-* **Reactive**: Programming via streaming based on [NodeJS Streams](https://nodejs.org/api/stream.html)
-* **Discovery**: Resolver API allows user-defined querying & resolution
-* **Isomorphic**: Can execute on the browser or the server with the same code baseline
-* **Extensible**: Add your own link types, handlers and stream transformers
-
-## How does it work?
-
-Under the covers, Endpoint.js is built on [NodeJS Streams](https://nodejs.org/api/stream.html), [NodeJS Events](https://nodejs.org/api/events.html) &
-[Browserify](http://browserify.org/).  Streams wrap communication technologies such as PostMessage, LocalStorage, and Web Sockets.
-Three foundation utilities, the Bus, the Messenger & the Streamer allow publishing of events, direct messaging, and streaming, respectively.
-An Endpoint is a composition of the Bus, Messenger and Streamer with a unique identifier.  All important Endpoint.js classes, such as Facade,
-Adapter, and Client-Instance are Endpoints which use the foundation utilities to communicate with each other.
-
-## How do I use it?
+## How do I use it (aka "Documentation")?
 
 Take a look at our [Basic Usage](docs/basic.md), [Configuration Guide](docs/configuration.md),
 [API at a Glance](docs/api.md), [Advanced Usage](docs/advanced.md), [Security Guide](docs/security.md),
 read the suggested [integration](docs/integration.md) document, or check out the
 [Architecture Diagram](docs/architecture.md).
 
-## Examples
-
-To run the demos, use the following on the command line:
-
-```bash
-npm install
-grunt demo
-```
-
-Open up a browser to one of the following examples:
-
-- [General Demo (Contains Sidebar, Map, and a simple 'Plot point' widget)](http://127.0.0.1:8282/plot-point/plot-point.html)
-- [API Example, including Stream](http://127.0.0.1:8282/general-api/general-api.html)
-- Distributed Chat Example [port 8282](http://127.0.0.1:8282/chat-server/chat-server.html) and [port 8283](http://127.0.0.1:8283/chat-server/chat-server.html)
-- [WebRTC Example](http://127.0.0.1:8282/chat-webrtc/chat-webrtc.html)
-- [Worker Pool Example](http://127.0.0.1:8282/worker-pool/worker-pool.html)
-- Cross Origin ([Plugin 1](http://localhost:8282/cross-origin/plugin1.html) at port 8282) and ([Plugin 2](http://localhost:8283/cross-origin/plugin2.html) at port 8283)
-- [Child Facade Example](http://127.0.0.1:8282/sub-facade/sub-facade.html)
-- [Authorization Example](http://127.0.0.1:8282/auth/auth.html) using child facades
-- [Node.js Child Process Example](http://127.0.0.1:8282/child-process/child-process.html)
-
-Additionally, an example of Endpoint.js being run on the express server is provided in examples/app.js.
-
 ## Build
+
+You must have node.js, npm and grunt-cli installed before building Endpoint.js:
+
+    npm install -g grunt-cli
 
 To build Endpoint.js, use the following:
 
@@ -96,6 +49,29 @@ To run integration tests (with chrome only for now), use the following commands.
 
     grunt integration-setup
     grunt integration
+
+## Examples
+
+To run the demos, use the following on the command line:
+
+```bash
+npm install
+grunt demo
+```
+
+Open up a browser to one of the following examples:
+
+- [General Demo (Contains Sidebar, Map, and a simple 'Plot point' widget)](http://127.0.0.1:8282/plot-point/plot-point.html)
+- [API Example, including Stream](http://127.0.0.1:8282/general-api/general-api.html)
+- Distributed Chat Example [port 8282](http://127.0.0.1:8282/chat-server/chat-server.html) and [port 8283](http://127.0.0.1:8283/chat-server/chat-server.html)
+- [WebRTC Example](http://127.0.0.1:8282/chat-webrtc/chat-webrtc.html)
+- [Worker Pool Example](http://127.0.0.1:8282/worker-pool/worker-pool.html)
+- Cross Origin ([Plugin 1](http://localhost:8282/cross-origin/plugin1.html) at port 8282) and ([Plugin 2](http://localhost:8283/cross-origin/plugin2.html) at port 8283)
+- [Child Facade Example](http://127.0.0.1:8282/sub-facade/sub-facade.html)
+- [Authorization Example](http://127.0.0.1:8282/auth/auth.html) using child facades
+- [Node.js Child Process Example](http://127.0.0.1:8282/child-process/child-process.html)
+
+Additionally, an example of Endpoint.js being run on the express server is provided in examples/app.js.
 
 ## Contributing
 
@@ -129,6 +105,8 @@ You must also include the following on IE8 and certain versions of Firefox:
 Powered by InnoVision, created by the GIAT
 
 Endpoint.js was developed at the National Geospatial-Intelligence Agency (NGA) in collaboration with [Booz Allen Hamilton](http://www.boozallen.com). The government has "unlimited rights" and is releasing this software to increase the impact of government investments by providing developers with the opportunity to take things in new directions.
+
+This documentation uses icons designed by Freepik.
 
 ## License
 

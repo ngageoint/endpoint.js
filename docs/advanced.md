@@ -1,7 +1,11 @@
 
 # Advanced Endpoint.js
 
-Endpoint.js Supports additional query options, streams, remote routing, asynchronous methods, and versioning.
+Under the covers, Endpoint.js is built on [NodeJS Streams](https://nodejs.org/api/stream.html), [NodeJS Events](https://nodejs.org/api/events.html) &
+[Browserify](http://browserify.org/).  Streams wrap communication technologies such as PostMessage, LocalStorage, and Web Sockets.
+Three foundation utilities, the Bus, the Messenger & the Streamer allow publishing of events, direct messaging, and streaming, respectively.
+An Endpoint is a composition of the Bus, Messenger and Streamer with a unique identifier.  All important Endpoint.js classes, such as Facade,
+Adapter, and Client-Instance are Endpoints which use the foundation utilities to communicate with each other.
 
 ## Table of Contents
 

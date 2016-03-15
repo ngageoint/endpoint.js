@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Endpoint.js : Web application discovery, execution and streaming library">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Endpoint.js</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ngageoint/endpoint.js">View on GitHub</a>
+
+          <h1 id="project_title">Endpoint.js</h1>
+          <h2 id="project_tagline">Web application discovery, execution and streaming library</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ngageoint/endpoint.js/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ngageoint/endpoint.js/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="-endpointjs-v040" class="anchor" href="#-endpointjs-v040" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><img src="docs/images/endpoint-small.png" alt="Endpoint.js"> Endpoint.js <a href="CHANGELOG.md">v0.4.0</a>
+</h1>
+
+<p><a href="https://travis-ci.org/ngageoint/endpoint.js"><img src="https://travis-ci.org/ngageoint/endpoint.js.svg?branch=master" alt="Build Status"></a></p>
+
+<p><strong>Endpoint.js</strong> enables modules within a web application to discover and use each other, whether that be on the same
+web page, other browser windows and tabs, iframes, servers, web workers and processes in a
+<a href="https://en.wikipedia.org/wiki/Reactive_programming">reactive way</a> by providing discovery, execution and streaming interfaces.</p>
+
+<p><img src="docs/images/network.png" alt="Ad-hoc Network"> A robust ad-hoc application network, enabling multi-hop communication across any topology, including browser windows, tabs, web workers, web servers, processes, and peer-to-peer</p>
+
+<p><img src="docs/images/performance.png" alt="Increased Performance"> Increased application performance, allowing easy off-loading and routing of complex processing to background workers, processes or browser tabs</p>
+
+<p><img src="docs/images/time.png" alt="Save Time"> Develop Here, Deploy There: Develop to uniform APIs, reducing deployment and integration details to a configuration exercise</p>
+
+<p><img src="docs/images/security.png" alt="Built-in Security"> Built-in security features enables fine-grained control over movement of data</p>
+
+<h2>
+<a id="how-do-i-use-it-aka-documentation" class="anchor" href="#how-do-i-use-it-aka-documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How do I use it (aka "Documentation")?</h2>
+
+<p>Take a look at our <a href="docs/basic.md">Basic Usage</a>, <a href="docs/configuration.md">Configuration Guide</a>,
+<a href="docs/api.md">API at a Glance</a>, <a href="docs/advanced.md">Advanced Usage</a>, <a href="docs/security.md">Security Guide</a>,
+read the suggested <a href="docs/integration.md">integration</a> document, or check out the
+<a href="docs/architecture.md">Architecture Diagram</a>.</p>
+
+<h2>
+<a id="build" class="anchor" href="#build" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build</h2>
+
+<p>You must have node.js, npm and grunt-cli installed before building Endpoint.js:</p>
+
+<pre><code>npm install -g grunt-cli
+</code></pre>
+
+<p>To build Endpoint.js, use the following:</p>
+
+<pre><code>npm install
+grunt production
+</code></pre>
+
+<p>The output files will be placed in dist/ folder.  To build plugins, use the following command:</p>
+
+<pre><code>grunt plugins
+</code></pre>
+
+<p>To build the documentation, use the following command.  The files will be placed in dist/jsdoc/ folder. In
+addition, a markdown file of all the markdown documentation will be placed in dist/endpoint-docs.pdf.</p>
+
+<pre><code>grunt docs
+</code></pre>
+
+<p>To run unit tests (with chrome only for now), use the following command. Coverage reports are in reports/coverage:</p>
+
+<pre><code>grunt test
+</code></pre>
+
+<p>To run integration tests (with chrome only for now), use the following commands. Logs are in reports/wdio:</p>
+
+<pre><code>grunt integration-setup
+grunt integration
+</code></pre>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>To run the demos, use the following on the command line:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm install
+grunt demo</pre></div>
+
+<p>Open up a browser to one of the following examples:</p>
+
+<ul>
+<li><a href="http://127.0.0.1:8282/plot-point/plot-point.html">General Demo (Contains Sidebar, Map, and a simple 'Plot point' widget)</a></li>
+<li><a href="http://127.0.0.1:8282/general-api/general-api.html">API Example, including Stream</a></li>
+<li>Distributed Chat Example <a href="http://127.0.0.1:8282/chat-server/chat-server.html">port 8282</a> and <a href="http://127.0.0.1:8283/chat-server/chat-server.html">port 8283</a>
+</li>
+<li><a href="http://127.0.0.1:8282/chat-webrtc/chat-webrtc.html">WebRTC Example</a></li>
+<li><a href="http://127.0.0.1:8282/worker-pool/worker-pool.html">Worker Pool Example</a></li>
+<li>Cross Origin (<a href="http://localhost:8282/cross-origin/plugin1.html">Plugin 1</a> at port 8282) and (<a href="http://localhost:8283/cross-origin/plugin2.html">Plugin 2</a> at port 8283)</li>
+<li><a href="http://127.0.0.1:8282/sub-facade/sub-facade.html">Child Facade Example</a></li>
+<li>
+<a href="http://127.0.0.1:8282/auth/auth.html">Authorization Example</a> using child facades</li>
+<li><a href="http://127.0.0.1:8282/child-process/child-process.html">Node.js Child Process Example</a></li>
+</ul>
+
+<p>Additionally, an example of Endpoint.js being run on the express server is provided in examples/app.js.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>All pull request contributions to this project will be released under the Apache 2.0 or compatible license.
+Software source code previously released under an open source license and then modified by NGA staff is considered a
+"joint work" (see 17 USC § 101); it is partially copyrighted, partially public domain, and as a whole is protected by
+the copyrights of the non-government authors and must be released according to the terms of the original open source
+license.</p>
+
+<h2>
+<a id="getting-support" class="anchor" href="#getting-support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Support</h2>
+
+<p>Our team is working to add a website and mailing list.  In the meantime, you can create an issue.</p>
+
+<h2>
+<a id="compatibility" class="anchor" href="#compatibility" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Compatibility</h2>
+
+<p>Endpoint.js is verified compatible with IE8+ and Firefox 3.6+.  Chrome in general is supported.</p>
+
+<p>If you want to use console on IE8, you must include the following ES5 shims:</p>
+
+<pre><code>https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.13/es5-shim.min.js
+https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.13/es5-sham.min.js
+</code></pre>
+
+<p>You must also include the following on IE8 and certain versions of Firefox:</p>
+
+<pre><code>https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.min.js
+</code></pre>
+
+<h2>
+<a id="copyright-and-legal" class="anchor" href="#copyright-and-legal" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Copyright and Legal</h2>
+
+<p>(C) 2016 Booz Allen Hamilton, All rights reserved</p>
+
+<p>Powered by InnoVision, created by the GIAT</p>
+
+<p>Endpoint.js was developed at the National Geospatial-Intelligence Agency (NGA) in collaboration with <a href="http://www.boozallen.com">Booz Allen Hamilton</a>. The government has "unlimited rights" and is releasing this software to increase the impact of government investments by providing developers with the opportunity to take things in new directions.</p>
+
+<p>This documentation uses icons designed by Freepik.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Endpoint.js maintained by <a href="https://github.com/ngageoint">ngageoint</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>

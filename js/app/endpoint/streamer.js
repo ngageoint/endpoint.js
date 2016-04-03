@@ -190,6 +190,13 @@ Streamer.prototype._handleMultiplexerStream = function(stream, opts) {
     var type = stream.meta.type;
     stream.meta = stream.meta.meta;
 
+    // If the stream ends, then clean-up
+    var _this = this;
+    stream.on('finish', function() {
+        log.log(log.DEBUG2, 'Cleaning up old stream after end: %s', stream.id);
+        delete _this._streamInfo[stream.id];
+    });    
+
     log.log(log.DEBUG2, 'Received new stream: [local: %s] [id: %s]', streamInfo.local, stream.id);
 
     // Emit it to the higher layer.
@@ -233,7 +240,7 @@ Streamer.prototype.createStream = function(type, remoteAddress, meta, opts) {
 
     // If the stream ends, then clean-up
     var _this = this;
-    stream.on('end', function() {
+    stream.on('finish', function() {
         log.log(log.DEBUG2, 'Cleaning up old stream after end: %s', newStreamId);
         delete _this._streamInfo[newStreamId];
     });

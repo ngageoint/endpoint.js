@@ -202,6 +202,7 @@ Multiplexer.prototype._createStream = function(meta, opts, streamId) {
         // Report back-pressure
         if (streamInfo.flowing) {
             this._sendProtocol(streamId, 'pause');
+            streamInfo.flowing = false;
         }
     }.bind(this));
 
@@ -210,6 +211,7 @@ Multiplexer.prototype._createStream = function(meta, opts, streamId) {
         // Report relief
         if (!streamInfo.flowing) {
             this._sendProtocol(streamId, 'resume');
+            streamInfo.flowing = true;
         }
     }.bind(this));
 
@@ -298,10 +300,6 @@ Multiplexer.prototype._handleProtocol = function(streamInfo, msg) {
                 break;
             case 'pause':
                 streamInfo.backPressure = true;
-                this._sendProtocol(msg.id, 'pause-ack');
-                break;
-            case 'pause-ack':
-                streamInfo.flowing = false;
                 break;
             case 'resume':
                 streamInfo.backPressure = false;
@@ -310,10 +308,6 @@ Multiplexer.prototype._handleProtocol = function(streamInfo, msg) {
                     streamInfo.backPressureCB = null;
                     cb();
                 }
-                this._sendProtocol(msg.id, 'resume-ack');
-                break;
-            case 'resume-ack':
-                streamInfo.flowing = true;
                 break;
         }
     }

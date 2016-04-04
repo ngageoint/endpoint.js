@@ -245,13 +245,6 @@ Multiplexer.prototype._transform = function(chunk, encoding, cb) {
             // Remote data destined for local
             if (!streamInfo) {
                 log.log(log.ERROR, 'Unknown stream: %s', chunk.id);
-                // Special case of protocol, where we have no idea
-                // what this stream is
-                this.write({
-                    id: chunk.id,
-                    local: true,
-                    p: 'error'
-                });
             }
             else {
                 streamInfo.read.write(chunk);

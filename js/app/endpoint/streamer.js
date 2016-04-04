@@ -114,15 +114,6 @@ Streamer.prototype._handleStreamPacket = function(packet, fromUuid, source) {
             source: source,
             remoteAddress: null
         };
-
-        try {
-            this._multiplexer.write(packet);
-        }
-        catch (e) {
-            // If we can't successfully convey the stream, then
-            // delete the local metadata
-            delete this._streamInfo[id];
-        }
     }
     else {
         // If we haven't gotten a source packet before, get the first one
@@ -134,8 +125,8 @@ Streamer.prototype._handleStreamPacket = function(packet, fromUuid, source) {
             // Ensure source matches the last source.
             return;
         }
-        this._multiplexer.write(packet);
     }
+    this._multiplexer.write(packet);
 };
 
 /**

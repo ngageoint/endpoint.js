@@ -1,4 +1,4 @@
-# ![Endpoint.js](docs/images/endpoint-small.png) Endpoint.js [v0.4.0](CHANGELOG.md)
+# ![Endpoint.js](docs/images/endpoint-small.png) Endpoint.js [v0.4.1](CHANGELOG.md)
 
 [![Build Status](https://travis-ci.org/ngageoint/endpoint.js.svg?branch=master)](https://travis-ci.org/ngageoint/endpoint.js)
 

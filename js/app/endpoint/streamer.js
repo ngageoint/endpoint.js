@@ -186,7 +186,7 @@ Streamer.prototype._handleMultiplexerStream = function(stream, opts) {
     stream.on('finish', function() {
         log.log(log.DEBUG2, 'Cleaning up old stream after end: %s', stream.id);
         delete _this._streamInfo[stream.id];
-    });    
+    });
 
     log.log(log.DEBUG2, 'Received new stream: [local: %s] [id: %s]', streamInfo.local, stream.id);
 

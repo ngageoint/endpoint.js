@@ -1,3 +1,11 @@
+<a name="0.4.1"></a>
+## `[0.4.1]`
+
+### Bug Fixes
+
+* ENDPOINT-8 Stream infinite loop issue
+* ENDPOINT-9 Stream Pause/Pause-ack performance improvement
+
 <a name="0.4.0"></a>
 ## `[0.4.0]` (02-04-2016)
 

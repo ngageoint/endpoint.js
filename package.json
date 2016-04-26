@@ -1,7 +1,7 @@
 {
   "name": "endpointjs",
   "version": "0.4.1",
-  "description": "Endpoint.js enables modules within a web application to discover and use each other, whether that be on the same web page, other browser windows and tabs, iframes, servers and web workers in a reactive way by providing robust discovery, execution and streaming interfaces.",
+  "description": "Web application discovery, execution and streaming library",
   "keywords": [
     "websockets",
     "webworkers",

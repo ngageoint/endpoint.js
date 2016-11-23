@@ -32,7 +32,7 @@ var EventEmitter = require('events').EventEmitter,
     inherits = require('util').inherits,
     address = require('../routing/address'),
     muxStream = require('../streams/mux-stream'),
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     appUtils = require('../util/appUtils'),
     log = appUtils.getLogger(__filename);
 

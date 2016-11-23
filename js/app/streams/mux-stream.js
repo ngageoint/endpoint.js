@@ -31,7 +31,7 @@
 var Transform = require('readable-stream').Transform,
     linkStream = require('./link-stream'),
     inherits = require('util').inherits,
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     through2 = require('through2'),
     xtend = require('xtend'),
     appUtils = require('../util/appUtils'),

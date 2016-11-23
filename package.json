@@ -20,7 +20,7 @@
     "type": "git"
   },
   "scripts": {
-      "test": "npm install -g grunt-cli && grunt test && grunt integration-setup && grunt integration"
+    "test": "npm install -g grunt-cli && grunt test && grunt integration-setup && grunt integration"
   },
   "devDependencies": {
     "browserify-istanbul": "^0.2.1",
@@ -60,9 +60,9 @@
     "webdriverio": "^3.4.0"
   },
   "dependencies": {
-    "node-uuid": "1.4.3",
     "readable-stream": "^2.0.5",
     "through2": "~2.0.0",
+    "uuid": "^3.0.0",
     "xtend": "^4.0.1"
   }
 }

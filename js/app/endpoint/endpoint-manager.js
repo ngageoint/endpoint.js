@@ -30,7 +30,7 @@
 var endpoint = require('./endpoint'),
     periodicTimer = require('../util/periodic-timer'),
     appUtils = require('../util/appUtils'),
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     log = appUtils.getLogger(__filename);
 
 module.exports = EndpointManager;

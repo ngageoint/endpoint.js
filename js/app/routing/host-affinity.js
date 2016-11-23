@@ -32,7 +32,7 @@ var EventEmitter = require('events').EventEmitter,
     inherits = require('util').inherits,
     isArray = require('util').isArray,
     addressTool = require('./address'),
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     appUtils = require('../util/appUtils'),
     log = appUtils.getLogger(__filename);
 

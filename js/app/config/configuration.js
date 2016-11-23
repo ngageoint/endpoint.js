@@ -29,7 +29,7 @@
 'use strict';
 
 var appUtils = require('../util/appUtils'),
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     isArray = require('util').isArray,
     workerLink = require('../link/worker'),
     tabLink = require('../link/tab'),

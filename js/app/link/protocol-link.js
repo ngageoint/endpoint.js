@@ -30,7 +30,7 @@
 
 var Link = require('./link'),
     inherits = require('util').inherits,
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     expHash = require('../util/expirable-hash'),
     appUtils = require('../util/appUtils'),
     log = appUtils.getLogger(__filename),

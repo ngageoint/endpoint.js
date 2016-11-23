@@ -30,7 +30,7 @@
 
 var Endpoint = require('../../endpoint/endpoint'),
     inherits = require('util').inherits,
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     constants = require('../../util/constants'),
     appUtils = require('../../util/appUtils'),
     log = appUtils.getLogger(__filename);

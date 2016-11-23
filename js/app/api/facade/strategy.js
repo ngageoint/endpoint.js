@@ -30,7 +30,7 @@
 
 var EventEmitter = require('events').EventEmitter,
     inherits = require('util').inherits,
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     baseCall = require('./calls/base-call'),
     callbackCall = require('./calls/callback-call'),
     facadeCall = require('./calls/facade-call'),

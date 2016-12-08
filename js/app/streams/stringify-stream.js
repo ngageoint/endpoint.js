@@ -83,7 +83,12 @@ module.exports.encodeFunction = function(inPlace, chunk) {
                     type: 'buffer-o',
                     index: i++
                 };
-                transfer.push(value.toArrayBuffer());
+                if (value.toArrayBuffer) {
+                    value = value.toArrayBuffer();
+                } else {
+                    value = value.buffer;
+                }
+                transfer.push(value);
                 return newValue;
             }
             return value;

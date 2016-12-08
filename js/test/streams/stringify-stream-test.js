@@ -11,12 +11,21 @@ describe('buffer stringify stream', function() {
         buffer = new Buffer('hello');
     });
 
+    function getBuffer(buff) {
+        if (buff.toArrayBuffer) {
+            buff = buff.toArrayBuffer();
+        } else {
+            buff = buff.buffer;
+        }
+        return buff;
+    }
+
     it('should decode out of place function', function() {
         var decode = stringifyStream.decodeFunction(false, {
             data: '{"thebuff":{"type":"buffer-o","index":0}}',
-            transfer: [buffer.toArrayBuffer()]
+            transfer: [getBuffer(buffer)]
         });
-        expect(decode.thebuff.toArrayBuffer()).toEqual(buffer.toArrayBuffer());
+        expect(getBuffer(decode.thebuff)).toEqual(getBuffer(buffer));
     });
 
     it('should decode in place function', function() {
@@ -32,7 +41,7 @@ describe('buffer stringify stream', function() {
         });
         expect(encode).toEqual({
             data: '{"thebuff":{"type":"buffer-o","index":0}}',
-            transfer: [buffer.toArrayBuffer()]
+            transfer: [getBuffer(buffer)]
         });
     });
 

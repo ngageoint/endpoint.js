@@ -52,17 +52,30 @@ var uuid = require('endpoint-uuid');
     function connect(api) {
         // Create a chat connection to the given id.
 
-        $(my._container).append(my._template);
-        var item = $(my._container).children().last();
-
         var settings = {
             api: api
         };
-        connected[api.id] = endpoint.createFacade('chat-api', '0.1', settings);
+        var facade = endpoint.createFacade('chat-api', '0.1', settings);
 
-        connected[api.id].on('ready', function() {
-            var str = connected[api.id].getApi().chat(my._adapter.getId()).stream();
-            setup(item, str, api.id);
+        facade.on('ready', function() {
+            // Already connected, prevent race condition
+            if (connected[api.id]) {
+              facade.close();
+              return;
+            }
+            var funcCall = facade.getApi().chat(my._adapter.getId());
+            var str = funcCall.then(function(response) {
+                if (response) {
+                    connected[api.id] = facade;
+                    $(my._container).append(my._template);
+                    var item = $(my._container).children().last();
+                    setup(item, str, api.id);
+                }
+                else {
+                    // No longer needed.
+                    facade.close();
+                }
+            }).stream();
         });
     }
 
@@ -93,15 +106,18 @@ var uuid = require('endpoint-uuid');
 
     // Establishes a change stream
     function chat(remoteId) {
+        var ctx = my._adapter.getCurrentContext();
+        var str = ctx.getInputStream();
         if (!connected[remoteId]) {
-            var ctx = my._adapter.getCurrentContext();
             var inst = ctx.getClientInstance();
             connected[remoteId] = inst;
-            var str = ctx.getInputStream();
             $(my._container).append(my._template);
             var item = $(my._container).children().last();
             setup(item, str, remoteId);
+            return true;
         }
+        str.close();
+        return false;
     }
 
     function setup(template, str, instanceId) {

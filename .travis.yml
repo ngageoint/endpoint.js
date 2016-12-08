@@ -1,15 +1,17 @@
-# use trusty beta
 dist: trusty
 sudo: required
 language: node_js
+addons:
+  sauce_connect: true
 node_js:
- - 'stable'
- - '0.12'
-before_install:  
- - export CHROME_BIN=/usr/bin/google-chrome
- - export DISPLAY=:99.0
- - sh -e /etc/init.d/xvfb start
- - sudo apt-get update
- - sudo apt-get install -y libappindicator1 fonts-liberation
- - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
- - sudo dpkg -i google-chrome*.deb
+- '0.12'
+- '4'
+- '5'
+- '6'
+cache:
+  directories:
+  - node_modules
+env:
+  global:
+  - secure: IJzREVA4hPMmd5Cr/mevK3OHwacFN78mwJNrg8XQ2Ffx9HmXIgZCs8ZfefQM1Ii/8yQeYiAAfM58CJy+34OeMDQUhirymmraK6Z38L/uVgpVMVdjG/tSX/GIj1UsW75iCIfexGSgMy9Lym0u95RrrcKoB7ucZxZb0547XV2wqcEvR8690BdVmkrXSYbtsdffB5qym83UkhO9EDyZsOx5DpnVJNz/pwt9xHsxX5qQprPutzkC38+9zHtAECd1pPuGMdpOe9qWBY1A6zdOS2zCPoyTnTKWbBQ9PyP5uFFALk9q54oHhyMpnd14SN4xssPZFgaJyuwiXgGC6jwVrcs863ZU+mmORbm7rlHu4kwKTx3xyWFC2kORve6zw8/MDbw75X4xJLhGQ0xqPeFbVQXShg1AYFetQqvR4N/GSwyQPd+8IZ8wtgFKu9TjA0wnsGbxdb9p6QC4htV4Bu+fYxEtLDiKnNJhSbN4jh6W1aP8XIZesNuBCKeEpyF7kxCe9WoS+WyKDa28KTANbm8w+8dmR3ioNxR6qJY0n3Yo8BkmArn5XoGY91IPJp0jTuWXbxdFJAJ+MRhJ6j7umHTEOMXehsz9zXE6WL5R21mv9t4JQKWRsaP6RvtiNW057P87PRPLzVG8sV5jd4HGfVkdmfTNEUh2GGH+E+/+wOrcCQCZDmI=
+  - secure: n/HPx1E0WGxSDZJZVejr+wNKm/EAyRb6Lx08HTyirRSVN3ctgPyWixZZ8ocr/1A2UJP5GG68fqRoQhF7x85n7aJHKKWaVQ2aLIlDCwCP8NSzMlTjEiHNK6HH0wsu1Kf9I5KaaZRZoXDAghUnjEHYo86ZHC2IhDAHaNAXnPh22kxwzTwIBK/7qnC8Az4Ydjut/bLhym3Irxbqud32GFWp5bSUVdAIxLO+JcFVNJ+juNPwUVeKXZu9Bs/vEmRlfg9XNZ0skS88YfDJv2DJR4mv8cP3yj8ReBKPcFgpTMyuKkQ0S58oCEhBn46lBru+5NlRAGVB5fRfw3lnmXH2Hw+l6H2lfptQRULPCYOAXgZMhfUzT4gZ/SnQ63kMB33UHspDdCeuggm+OKPeb1s9eALP06mKxv45OkWRAQfcSqnpHrk5MDdwfxm90hCIGuCg9QBOxboavwoLGucIqG3SuLjMctQkO3aLaqvJmKO7yvlnhU7yd4YwfBl+tCg2f3dErirOMcrZX2Yt01qMO17NrBtN/fZSDJIIDNskSdSzAzw8kR9Evv4dqGXu02YSVqfdkczbP2Ki+ck3ciPEN3bHwUPmej++KeuBHy2+kP8JbqNrc7tGMtXu5VhLj1xXI8mgg2SJ12WTyNcqLrRBwQ49Ii4UTyqxEqpzJSTIsx5bDv1YL8s=

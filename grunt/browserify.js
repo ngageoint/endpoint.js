@@ -11,7 +11,7 @@ module.exports = {
                 'events:endpoint-events',
                 'util:endpoint-util',
                 'buffer:endpoint-buffer',
-                'node-uuid:endpoint-uuid',
+                'uuid:endpoint-uuid',
                 'through2:endpoint-through2'
             ],
             browserifyOptions: {

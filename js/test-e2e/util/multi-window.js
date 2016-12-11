@@ -11,49 +11,49 @@ module.exports = function() {
     var data = {
         first: func,
         second: func,
-        then: null,
-        clean: function(then) {
-            return then.switchTab(data.first())
-                .close(data.second());
+        clean: function() {
+            data.second().close();
+            data.first();
         }
     };
 
     var first;
     var second;
 
-    data.then = browser
-        .url('http://localhost:8282/blank.html')
+    browser.url('http://localhost:8282/blank.html');
 
-        .getTabIds()
-        .then(function(res) {
-            first = res[0];
-            data.first = function() {
-                return first;
-            };
-        })
+    var res = browser.getTabIds();
+    first = res[0];
+    data.firstWindow = first;
+    data.first = function() {
+        var wind = browser.switchTab(first);
+        browser.pause(1000);
+        return wind;
+    };
 
-        .click('a=open blank tab')
+    browser.click('a=open blank tab');
 
-        .pause(1000)
+    browser.pause(1000);
 
-        .getTabIds()
-        .then(function(res) {
-            var tabs = res.slice(0);
+    res = browser.getTabIds();
+    var tabs = res.slice(0);
 
-            if (tabs.length != 2) {
-                throw new Error('expected two open chrome tabs');
-            }
+    if (tabs.length != 2) {
+        throw new Error('expected two open chrome tabs');
+    }
 
-            var index = tabs.indexOf(first);
-            tabs.splice(index, 1);
-            second = tabs[0];
+    var index = tabs.indexOf(first);
+    tabs.splice(index, 1);
+    second = tabs[0];
 
-            data.second = function() {
-                return second;
-            };
+    data.secondWindow = second;
+    data.second = function() {
+        var wind = browser.switchTab(second);
+        browser.pause(1000);
+        return wind;
+    };
 
-            return this.switchTab(data.first());
-        });
+    data.first();
 
     return data;
 };

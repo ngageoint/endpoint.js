@@ -21,6 +21,9 @@ integration-setup:
 
 integration:
   - selenium-start
+  - integration-travis
+
+integration-travis:
   - browserify:demo
   - express:demo
   - mkdir:reports
@@ -35,7 +38,6 @@ plugins:
   - uglify:webrtc
 
 build:
-  - clear
   - clean:default
   - lint
   - browserify:build

@@ -1,4 +1,4 @@
-exports.config = {
+var config = {
 
     //
     // ==================
@@ -10,7 +10,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './js/test-e2e/**/*.js'
+        './js/test-e2e/**/*.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -29,8 +29,20 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [{
-        browserName: 'chrome'
+    capabilities: [
+    //{
+    //    browserName: 'firefox',
+    //    version: 'latest',
+    //    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+    //    name: 'integration',
+    //    build: process.env.TRAVIS_BUILD_NUMBER
+    //},
+    {
+        browserName: 'chrome',
+        version: 'latest',
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
+        name: 'integration',
+        build: process.env.TRAVIS_BUILD_NUMBER
     }],
     //
     // ===================
@@ -38,6 +50,10 @@ exports.config = {
     // ===================
     // Define all options that are relevant for the WebdriverIO instance here
     //
+    // New settings added in newer version of wdio.
+    debug: false,
+    maxInstances: 1,
+    pageLoadStrategy: 'normal',
     // Level of logging verbosity: silent | verbose | command | data | result | error
     logLevel: 'command',
     //
@@ -45,14 +61,14 @@ exports.config = {
     coloredLogs: true,
     //
     // Saves a screenshot to a given path if a command fails.
-    screenshotPath: './reports/errorShots/',
+    // screenshotPath: './reports/errorShots/',
     //
     // Set a base URL in order to shorten url command calls. If your url parameter starts
     // with "/", the base url gets prepended.
     baseUrl: '',
     //
     // Default timeout for all waitForXXX commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 60000,
     //
     // Initialize the browser instance with a WebdriverIO plugin. The object should have the
     // plugin name as key and the desired plugin options as property. Make sure you have
@@ -86,7 +102,7 @@ exports.config = {
     // Test reporter for stdout.
     // The following are supported: dot (default), spec and xunit
     // see also: http://webdriver.io/guide/testrunner/reporters.html
-    reporter: 'xunit',
+    reporters: ['dot', 'junit'],
 
     //
     // Some reporter require additional information which should get defined here
@@ -102,7 +118,7 @@ exports.config = {
     jasmineNodeOpts: {
         //
         // Jasmine default timeout
-        defaultTimeoutInterval: 10000,
+        defaultTimeoutInterval: 60000,
         //
         // The Jasmine framework allows it to intercept each assertion in order to log the state of the application
         // or website depending on the result. For example it is pretty handy to take a screenshot everytime
@@ -127,7 +143,8 @@ exports.config = {
     // Gets executed before test execution begins. At this point you will have access to all global
     // variables like `browser`. It is the perfect place to define custom commands.
     before: function() {
-        // do something
+        // Let the server settle.
+        browser.pause(2500);
     },
     //
     // Gets executed after all tests are done. You still have access to all global variables from
@@ -142,3 +159,11 @@ exports.config = {
         // do something
     }
 };
+
+// Sauce Labs setup
+if (process.env.CI) {
+    config.user = process.env.SAUCE_USERNAME;
+    config.key = process.env.SAUCE_ACCESS_KEY;
+}
+
+exports.config = config;

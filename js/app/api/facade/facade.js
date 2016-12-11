@@ -31,7 +31,7 @@
 var Endpoint = require('../../endpoint/endpoint'),
     inherits = require('util').inherits,
     isArray = require('util').isArray,
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     format = require('util').format,
     strategy = require('./strategy'),
     constants = require('../../util/constants'),

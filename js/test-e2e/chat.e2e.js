@@ -4,63 +4,48 @@ describe('Chat', function() {
 
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
-    // This 'init()' is done to clear the log, as webdriverio-runner doesn't do that between testsuites
-    beforeEach(function(done) {
-        browser.init(done);
-    });
-
-    it('it should work', function(done) {
+    it('it should work', function() {
 
         var i1 = 0;
         var i2 = 0;
 
         var wnd = multi();
 
-        wnd.then
-            .url('http://localhost:8282/chat-server/chat-server.html')
+        browser.url('http://localhost:8282/chat-server/chat-server.html');
 
-            .then(function() {
-                return this.switchTab(wnd.second());
-            })
+        wnd.second();
 
-            .url('http://localhost:8283/chat-server/chat-server.html')
+        browser.url('http://localhost:8283/chat-server/chat-server.html');
 
-            .waitForExist('.btn-input')
+        browser.waitForExist('.btn-input');
 
-            .pause(2000)//wait for the other chat window to connect
+        wnd.first();
 
-            .setValue('.btn-input', 'test')
-            .click('button.btn-chat')
+        //wait for the other chat window to connect
+        browser.waitForExist('.btn-input');
 
-            .waitForExist('.message')
+        browser.setValue('.btn-input', 'test');
+        browser.click('button.btn-chat');
 
-            // Switch to next window
-            .then(function() {
-                return this.switchTab(wnd.first());
-            })
+        browser.waitForExist('.message');
 
-            .waitForExist('.message')
+        // Switch to next window
+        wnd.second();
 
-            .setValue('.btn-input', 'test back')
-            .click('button.btn-chat')
-            .pause(1000)
+        browser.waitForExist('.message');
 
-            .log('browser')
-            .then(function(log) {
-                console.log('Analyzing ' + log.value.length + ' log entries');
-                log.value.forEach(function(entry) {
-                    expect(entry.message).not.toMatch(/\[error\]/);
-                    // Allow warn!
-                });
+        browser.setValue('.btn-input', 'test back');
+        browser.click('button.btn-chat');
+        browser.pause(1000);
 
-                return wnd.clean(this);
-            })
+        var log = browser.log('browser');
+        console.log('Analyzing ' + log.value.length + ' log entries');
+        log.value.forEach(function(entry) {
+            expect(entry.message).not.toMatch(/\[error\]/);
+            // Allow warn!
+        });
 
-            .call(done);
-    });
-
-    afterEach(function(done) {
-        browser.end(done);
+        wnd.clean();
     });
 
 });

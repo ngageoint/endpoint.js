@@ -31,7 +31,7 @@
 var Endpoint = require('../../endpoint/endpoint'),
     inherits = require('util').inherits,
     format = require('util').format,
-    uuid = require('node-uuid'),
+    uuid = require('uuid'),
     callContext = require('./context'),
     address = require('../../routing/address'),
     constants = require('../../util/constants'),

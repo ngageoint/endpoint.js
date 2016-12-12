@@ -345,7 +345,7 @@ FacadeCall.prototype.execute = function() {
                 args.push(item.getRemoteId());
             }
             /*jshint -W069 */
-            else if (item['_facade'] && item['_facade'] instanceof Facade) {
+            else if (item !== null && item['_facade'] && item['_facade'] instanceof Facade) {
                 xargs.push(i);
                 args.push(item['_facade'].getRemoteId());
             }

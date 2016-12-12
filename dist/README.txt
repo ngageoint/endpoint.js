@@ -1,0 +1,1 @@
+This directory contains the debug + compiled versions of endpoint.js and its plugins.

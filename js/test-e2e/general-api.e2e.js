@@ -48,7 +48,6 @@ describe('General API', function() {
         console.log('Analyzing ' + log.value.length + ' log entries');
         log.value.forEach(function(entry) {
             expect(entry.message).not.toMatch(/\[error\]/);
-            expect(entry.message).not.toMatch(/\[warn\]/);
         });
     });
 
